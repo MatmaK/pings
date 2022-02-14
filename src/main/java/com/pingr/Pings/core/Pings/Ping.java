@@ -1,6 +1,7 @@
 package com.pingr.Pings.core.Pings;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Table
@@ -68,5 +69,20 @@ public class Ping {
 
     public void setIdPingReplied(Long idPingReplied) {
         this.idPingReplied = idPingReplied;
+    }
+
+    public Map<String, Object> toMap() {
+        return Map.of(
+                "pingId", id,
+                "authorId", idAccount,
+                "body", text
+        );
+    }
+
+    public Map<String, Object> toMapWithoutBody() {
+        return Map.of(
+                "pingId", id,
+                "authorId", idAccount
+        );
     }
 }

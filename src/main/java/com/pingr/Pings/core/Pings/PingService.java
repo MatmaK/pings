@@ -1,5 +1,6 @@
 package com.pingr.Pings.core.Pings;
 
+import com.pingr.Pings.application.ProducerService;
 import com.pingr.Pings.core.AccountRepository;
 import com.pingr.Pings.core.exceptions.AccountNotFoundException;
 import com.pingr.Pings.core.exceptions.PingNotFoundException;
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class PingService {
     private final PingRepository pingRepo;
     private final AccountRepository accountRepo;
+    private final ProducerService service;
 
     @Autowired
-    public PingService(PingRepository pingRepo, AccountRepository accountRepo) {
+    public PingService(PingRepository pingRepo, AccountRepository accountRepo, ProducerService service) {
         this.pingRepo = pingRepo;
         this.accountRepo = accountRepo;
+        this.service = service;
     }
 
     public Ping create (Ping ping) {
@@ -25,7 +28,8 @@ public class PingService {
 
         try {
             Ping savedPing = pingRepo.save(ping);
-            //emitPing
+            service.emitPingCreatedEvent(ping);
+
             return savedPing;
         }
         catch (Exception e) {
@@ -43,7 +47,8 @@ public class PingService {
         try {
             ping.setIdPingReplied(idPingReplied);
             Ping savedPing = pingRepo.save(ping);
-            //emit ping created
+            service.emitPingCreatedEvent(ping);
+
             return savedPing;
         }
         catch (Exception e) {
@@ -60,11 +65,12 @@ public class PingService {
     }
 
     public void delete (Long idPing) {
-        if (!pingExists(idPing))
+        Optional<Ping> optPing = pingRepo.findById(idPing);
+        if (optPing.isEmpty())
             throw new PingNotFoundException(idPing);
 
         pingRepo.deleteById(idPing);
-        //emit pingDeleted
+        service.emitPingDeletedEvent(optPing.get());
     }
 
     private boolean accountExists(Long id) {

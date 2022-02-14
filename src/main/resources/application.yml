@@ -25,6 +25,8 @@ spring:
 topics:
   acc_created: accounts_created
   acc_deleted: accounts_removed
+  ping_created: ping_created
+  ping_deleted: ping_deleted
 
 server:
   port: 8083
