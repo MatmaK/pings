@@ -8,10 +8,10 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       bootstrap-servers: localhost:9092
-      group-id: CHASSIS-GROUP-ID
+      group-id: pings
   datasource:
     username: root
-    url: jdbc:postgresql://localhost:CHASSIS-PG-HOST-PORT/CHASSIS-DB-NAME
+    url: jdbc:postgresql://localhost:5434/pings
     password: secret
   jpa:
     properties:
@@ -27,6 +27,6 @@ topics:
   acc_deleted: accounts_removed
 
 server:
-  port: CHASSIS-PORT
+  port: 8083
   error:
     include-message: always
