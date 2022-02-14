@@ -1,8 +1,8 @@
-package com.pingr.Chassis.application;
+package com.pingr.Pings.application;
 
-import com.pingr.Chassis.core.Account;
-import com.pingr.Chassis.core.events.AccountCreatedEvent;
-import com.pingr.Chassis.core.events.AccountDeletedEvent;
+import com.pingr.Pings.core.Account;
+import com.pingr.Pings.core.events.AccountCreatedEvent;
+import com.pingr.Pings.core.events.AccountDeletedEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

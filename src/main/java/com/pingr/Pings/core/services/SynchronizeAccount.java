@@ -1,7 +1,7 @@
-package com.pingr.Chassis.core.services;
+package com.pingr.Pings.core.services;
 
-import com.pingr.Chassis.core.Account;
-import com.pingr.Chassis.core.AccountRepository;
+import com.pingr.Pings.core.Account;
+import com.pingr.Pings.core.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

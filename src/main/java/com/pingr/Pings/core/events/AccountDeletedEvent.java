@@ -1,13 +1,13 @@
-package com.pingr.Chassis.core.events;
+package com.pingr.Pings.core.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pingr.Chassis.core.Account;
+import com.pingr.Pings.core.Account;
 
 import java.util.Map;
 
 @JsonSerialize
-public class AccountCreatedEvent {
+public class AccountDeletedEvent {
 
     @JsonProperty
     private String eventType;
@@ -18,16 +18,15 @@ public class AccountCreatedEvent {
     @JsonProperty
     private Map<String, Object> payload;
 
-    public AccountCreatedEvent() {
+    public AccountDeletedEvent() {
     }
 
-    public AccountCreatedEvent(String eventType, Long accountId, Map<String, Object> payload) {
+    public AccountDeletedEvent(String eventType, Long accountId, Map<String, Object> payload) {
         this.eventType = eventType;
         this.accountId = accountId;
         this.payload = payload;
     }
 
-    // operação inversa do método estático AccountCreatedEvent.of(Account)
     public Account extract() {
         return new Account(this.accountId);
     }
